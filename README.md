@@ -29,3 +29,12 @@ How to turn ciphertext into plaintext given product `n` and public exponent `e`:
 [onlineasciitools](https://onlineasciitools.com/convert-decimal-to-ascii) can
 decode decimal to ascii without a clear delimiter. This was also identifiable as
 requiring hex to ascii decoding because 123 is `{` and 125 is `}`.)
+
+## Threat intelligence tools 
+* [Urlscan.io](https://urlscan.io): website analysis, automated crawling
+* [ThreatFox](https://threatfox.abuse.ch): indicators of compromise (IOCs)
+* [URLhaus](https://urlhaus.abuse.ch): malware URLs
+* [MALWAREbazaar](https://bazaar.abuse.ch): malware samples
+* [PhishTool Community](https://app.phishtool.com/submit): emails
+* [VirusTotal](https://www.virustotal.com/gui/home/upload): files / domains /
+  IPs / URLs
