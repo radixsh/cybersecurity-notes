@@ -1,4 +1,7 @@
-# CTF notes
+# CTF notes 
+My first attempt to collect cybersecurity resources and create explanatory notes
+for myself. I remember things best when I teach them to myself.
+
 ## RSA
 [Source](https://github.com/Tartifletteuhh/UnlockTheCityCTF2022-WriteUps-SKBO/tree/master/District2/Secret_ConveRSAtions)
 
@@ -6,17 +9,18 @@ Factorization attack: if we know `N`, `p`, and `q`, then we can find the private
 key `d` and the totient function `phi(n)` which will give us access to the
 message.
 
-`c = m^e, mod n`
+ciphertext = plaintext to the power of public exponent, mod product of two
+large primes
 
-(ciphertext = plaintext to the power of public exponent, mod product of two
-large primes)
+> `c = m^e, mod n`
 
-`m = c^d, mod n`
+plaintext = ciphertext to the power of private exponent, mod the same product
+as before
 
-(plaintext = ciphertext to the power of private exponent, mod the same product
-as before)
+> `m = c^d, mod n`
 
-How to turn ciphertext into plaintext given product `n` and public exponent `e`: 
+How to turn ciphertext into plaintext given product `n` and public exponent `e`:
+
 1. Given product `n`, use factorDB.py to find prime factors `p` and `q`:
    `python3 factorDB.py YOUR_N_HERE`
 2. Find totient function, which counts the positive ints up to `n` that are
@@ -30,7 +34,7 @@ How to turn ciphertext into plaintext given product `n` and public exponent `e`:
 decode decimal to ascii without a clear delimiter. This was also identifiable as
 requiring hex to ascii decoding because 123 is `{` and 125 is `}`.)
 
-## Threat intelligence tools 
+## Threat intelligence tools
 * [Urlscan.io](https://urlscan.io): website analysis, automated crawling
 * [ThreatFox](https://threatfox.abuse.ch): indicators of compromise (IOCs)
 * [URLhaus](https://urlhaus.abuse.ch): malware URLs
