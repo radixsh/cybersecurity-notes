@@ -1,13 +1,21 @@
-# Cryptography
-## Notes 
+# Cryptography 
+## Tools
+* John the Ripper
+    * [Beginner's Guide](https://www.hackingarticles.in/beginner-guide-john-the-ripper-part-1)
+    * [JTR Cheatsheet](https://countuponsecurity.files.wordpress.com/2016/09/jtr-cheat-sheet.pdf)
+* hashcat
+* [CyberChef](https://gchq.github.io/CyberChef)
+
+## Notes
 ### Basic decoding
 * hexadecimal: 2 digits per unit of meaning; often starts with 0x; consists of
   letters from alphabet `0123456789abcdef`
 * base64: length is divisible by 4; often padded with `==`
 * [ascii codes to ascii characters](https://convert.town/ascii-to-text)
 * octal: base 8; just use CyberChef
-* substitution cipher: letters are replaced by other letters; quipqiup is good
-  at automatically decoding substitution ciphers
+* substitution cipher: letters are replaced by other letters;
+  [quipqiup](quipqiup.com) is good at automatically decoding substitution
+  ciphers
     * Caesar cipher (aka rot13): shift the alphabet by some number; e.g., with a shift of 3,
       A becomes D, B becomes E
     * atbash: A becomes Z, B becomes Y, etc.
@@ -38,13 +46,13 @@
 * [NTLM aka ntHash](https://medium.com/@petergombos/lm-ntlm-net-ntlmv2-oh-my-a9b235c58ed4):
   Windows hash system
     * `./john --format=netntlmv2 NAME.txt`
-* [RSA step by step explanation](https://www.cryptool.org/en/cto/rsa-step-by-step)
+* RSA
+    * [My explanation of RSA](rsa.md)
+    * [RSA step by step explanation](https://www.cryptool.org/en/cto/rsa-step-by-step)
     * [RSA calculator](https://www.cs.drexel.edu/~jpopyack/Courses/CSP/Fa17/notes/10.1_Cryptography/RSA_Express_EncryptDecrypt_v2.html)
     * [RsaCtfTool](https://github.com/RsaCtfTool/RsaCtfTool): can do lots of
       attacks
-    * [My explanation of RSA](rsa.md)
-* [encrypted pdfs](https://ctftime.org/writeup/8707): `pdfcrack
-  --wordlist=rockyou.txt NAME.pdf`
+* [encrypted pdfs](https://ctftime.org/writeup/8707): `pdfcrack --wordlist=rockyou.txt NAME.pdf`
 * shadow and passwd file dehashing
     * [shadow format](https://www.linuxquestions.org/questions/linux-security-4/etc-shadow-file-663816): `$1$IwCH$c5VgaFQG9VZdL1UnWDUmj0`
         * The part between the first two “$”s is the type of algorithm used (1
@@ -74,8 +82,3 @@
 * steghide
 * Check file's [magic numbers](https://en.wikipedia.org/wiki/List_of_file_signatures)
   to make sure it is what its file extension says it is
-
-## Tools
-* John the Ripper
-    * [Beginner's Guide](https://www.hackingarticles.in/beginner-guide-john-the-ripper-part-1)
-    * [JTR Cheatsheet](https://countuponsecurity.files.wordpress.com/2016/09/jtr-cheat-sheet.pdf)
