@@ -1,5 +1,6 @@
 # Cryptography
-## Basic decoding
+## Notes 
+### Basic decoding
 * hexadecimal: 2 digits per unit of meaning; often starts with 0x; consists of
   letters from alphabet `0123456789abcdef`
 * base64: length is divisible by 4; often padded with `==`
@@ -20,7 +21,7 @@
 * [decimal to ascii without a clear delimiter](https://onlineasciitools.com/convert-decimal-to-ascii)
     * example ctf challenge: [SECRET CONVE.RSA.TIONS](https://github.com/Tartifletteuhh/UnlockTheCityCTF2022-WriteUps-SKBO/tree/master/District2/Secret_ConveRSAtions)
 
-## Actual decryption
+### Actual decryption
 * md5: 128-bit output (32 ascii chars); easily hackable using dictionary attacks
   like john the ripper with `rockyou.txt`
     * [passwordrecovery.io](https://passwordrecovery.io/md5): md5 hash cracker;
@@ -58,7 +59,7 @@
     * `./john/run/john --format=md5crypt-opencl --wordlist=../../rockyou.txt
       passwords.txt`
 
-## Steganography: hiding messages in files
+### Steganography: hiding messages in files
 * [0xRick's list of tools/resources](https://0xrick.github.io/lists/stego): some
   person's
 * [First steps cheatsheet](https://pequalsnp-team.github.io/cheatsheet/steganography-101)
@@ -73,3 +74,8 @@
 * steghide
 * Check file's [magic numbers](https://en.wikipedia.org/wiki/List_of_file_signatures)
   to make sure it is what its file extension says it is
+
+## Tools
+* John the Ripper
+    * [Beginner's Guide](https://www.hackingarticles.in/beginner-guide-john-the-ripper-part-1)
+    * [JTR Cheatsheet](https://countuponsecurity.files.wordpress.com/2016/09/jtr-cheat-sheet.pdf)
