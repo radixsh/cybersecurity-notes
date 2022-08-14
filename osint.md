@@ -12,3 +12,6 @@ OSINT = Open Source INTelligence
     * [PhishTool Community](https://app.phishtool.com/submit): emails
     * [VirusTotal](https://virustotal.com/gui/home/upload): files / domains /
       IPs / URLs
+* [Wigle](https://wigle.net): aggregated wifi network data
+* [Yara](https://virustotal.github.io/yara): pattern matcher for malware
+* [Rapid7](https://www.rapid7.com/fundamentals): cybersecurity/management basics
