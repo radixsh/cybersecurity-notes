@@ -1,4 +1,4 @@
-# Cryptography 
+# Cryptography
 ## Tools
 * John the Ripper
     * [Beginner's Guide](https://www.hackingarticles.in/beginner-guide-john-the-ripper-part-1)
@@ -8,33 +8,62 @@
 
 ## Notes
 ### Basic decoding
-* hexadecimal: 2 digits per unit of meaning; often starts with 0x; consists of
+* Hexadecimal: 2 digits per unit of meaning; often starts with 0x; consists of
   letters from alphabet `0123456789abcdef`
-* base64: length is divisible by 4; often padded with `==`
+* Base64: length is divisible by 4; often padded with `==`
 * [ascii codes to ascii characters](https://convert.town/ascii-to-text)
-* octal: base 8; just use CyberChef
-* substitution cipher: letters are replaced by other letters;
+* Octal: base 8; just use CyberChef
+* Substitution cipher: letters are replaced by other letters;
   [quipqiup](quipqiup.com) is good at automatically decoding substitution
   ciphers
-    * Caesar cipher (aka rot13): shift the alphabet by some number; e.g., with a shift of 3,
-      A becomes D, B becomes E
+    * Caesar cipher (aka rot13): shift the alphabet by some number; e.g., with a
+      shift of 3, A becomes D, B becomes E
     * atbash: A becomes Z, B becomes Y, etc.
     * vigenere: you have to have a key
-    * [statistical analysis for substitution ciphers](https://www.guballa.de/substitution-solver)
-    * [qwerty fingers on dvorak keyboard](http://wbic16.xedoloh.com/dvorak.html)
-* railfence: rearrange text in a wave pattern (up and down) and read from left
-  to right
+    * [Statistical analysis for substitution ciphers](https://www.guballa.de/substitution-solver)
+    * [QWERTY fingers on dvorak keyboard](http://wbic16.xedoloh.com/dvorak.html)
 * Morse code: try a lot of different online decoders, and make sure to check for
   caps, etc.
-* [decimal to ascii without a clear delimiter](https://onlineasciitools.com/convert-decimal-to-ascii)
-    * example ctf challenge: [SECRET CONVE.RSA.TIONS](https://github.com/Tartifletteuhh/UnlockTheCityCTF2022-WriteUps-SKBO/tree/master/District2/Secret_ConveRSAtions)
+    * Looks like `----. ----. ----. / -.... -.... -.... / ---.. ---.. / ..---
+      ..--- ..--- / ..---/ -.... -.... / --... --... --... / ...-- ...-- / ..---
+      / ...-- / -.... / ----.----. ----. / --... --... --... --... / -.... /
+      --... --... --... --...`
+    * There will be dots, dashes, probably spaces (between characters), and
+      probably slashes (between words). [Morse Decoder](https://morsedecoder.com)
+      can decode that without trouble.
+* [Decimal to ascii without a clear delimiter](https://onlineasciitools.com/convert-decimal-to-ascii)
+    * Example ctf challenge: [SECRET CONVE.RSA.TIONS](https://github.com/Tartifletteuhh/UnlockTheCityCTF2022-WriteUps-SKBO/tree/master/District2/Secret_ConveRSAtions)
+* SMS
+    * Looks like `999 666 88 222 2 66 777 33 2 3 6 999 7777 6 7777`
+    * Example ctf challenge: [Tring Tring](https://github.com/S-H-E-L-L/S.H.E.L.L-CTF-2022/blob/main/crypto/Tring%20Tring/solution.md)
+
+### Weird ones
+* Pigpen
+* [Birds on a wire](https://www.dcode.fr/birds-on-a-wire-cipher)
+    * Example ctf challenge: [Tweeeeet](https://github.com/S-H-E-L-L/S.H.E.L.L-CTF-2022/blob/main/crypto/Tweeeeet/solution.md)
+    * It looks like the birds have to be precise matches; it isn't just a bird
+      in general looking left/up/whatever. So the dcode link would be helpful.
+    * Also, don't do this by hand. I'm never getting back the ten minutes I just
+      spent walking through that chal.
+* Railfence: rearrange text in a wave pattern (up and down) and read from left
+  to right
+* [Esoteric programming languages](https://esolangs.org/wiki/Language_list)
+    * [Brainfuck](https://esolangs.org/wiki/Brainfuck) looks like
+      `++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>
+      >.<-.<.+++.------.--------.>>+.>++.`
+    * [Malbolge](https://malbolge.doleczek.pl) looks like
+      ```('&%:9]!~}|z2Vxwv-,POqponl$Hjig%eB@@>}=<M:9wv6WsU2T|nm-,jcL(I&%$#"
+      `CB]V?Tx<uVtT`Rpo3NlF.Jh++FdbCBA@?]!~|4XzyTT43Qsqq(Lnmkj"Fhg${z@>
+      ```
+
+
 
 ### Actual decryption
-* md5: 128-bit output (32 ascii chars); easily hackable using dictionary attacks
-  like john the ripper with `rockyou.txt`
-    * [passwordrecovery.io](https://passwordrecovery.io/md5): md5 hash cracker;
+* MD5: 128-bit output (32 ascii chars); easily hackable using dictionary attacks
+  like John the Ripper with `rockyou.txt`
+    * [passwordrecovery.io](https://passwordrecovery.io/md5): MD5 hash cracker;
       it'll compare your hash against hashes from `rockyou.txt` very quickly
-* [getting started with john the ripper](https://www.tunnelsup.com/getting-started-cracking-password-hashes/)
+* [Getting Started with John the Ripper](https://www.tunnelsup.com/getting-started-cracking-password-hashes/)
 * [hashcat](https://github.com/hashcat/hashcat)
     * If you know part of the plaintext of a hash, then use [mask attack](https://hashcat.net/wiki/doku.php?id=mask_attack)
     * Download and unzip and make as necessary
@@ -82,3 +111,4 @@
 * steghide
 * Check file's [magic numbers](https://en.wikipedia.org/wiki/List_of_file_signatures)
   to make sure it is what its file extension says it is
+* [StegOnline](https://stegonline.georgeom.net/upload)
