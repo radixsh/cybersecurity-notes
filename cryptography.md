@@ -59,6 +59,15 @@
 
 
 ### Actual decryption
+* XOR: in py, ord() converts character to number; chr() converts number to
+  character 
+    * Example ctf challenge: [OX9OR2](https://github.com/S-H-E-L-L/S.H.E.L.L-CTF-2022/tree/main/crypto/OX9OR2)
+    ```
+    key = 'ctf{flag}'
+    output = ''
+    for i in range(len(input)):
+        output += chr(ord(input[i]) ^ ord(key[i % len(key)]))
+    ```
 * MD5: 128-bit output (32 ascii chars); easily hackable using dictionary attacks
   like John the Ripper with `rockyou.txt`
     * [passwordrecovery.io](https://passwordrecovery.io/md5): MD5 hash cracker;
