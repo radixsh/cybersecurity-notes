@@ -1,10 +1,11 @@
 # Cryptography
 ## Tools
 * John the Ripper
-    * [Beginner's Guide](https://www.hackingarticles.in/beginner-guide-john-the-ripper-part-1)
+    * [Beginner's Guide](https://hackingarticles.in/beginner-guide-john-the-ripper-part-1)
     * [JTR Cheatsheet](https://countuponsecurity.files.wordpress.com/2016/09/jtr-cheat-sheet.pdf)
 * hashcat
 * [CyberChef](https://gchq.github.io/CyberChef)
+* [Boxentriq Cipher Identifier and Analyzer](https://boxentriq.com/code-breaking/cipher-identifier)
 
 ## Notes
 ### Basic decoding
@@ -14,13 +15,13 @@
 * [ascii codes to ascii characters](https://convert.town/ascii-to-text)
 * Octal: base 8; just use CyberChef
 * Substitution cipher: letters are replaced by other letters;
-  [quipqiup](quipqiup.com) is good at automatically decoding substitution
+  [quipqiup](https://quipqiup.com) is good at automatically decoding substitution
   ciphers
     * Caesar cipher (aka rot13): shift the alphabet by some number; e.g., with a
       shift of 3, A becomes D, B becomes E
     * atbash: A becomes Z, B becomes Y, etc.
     * vigenere: you have to have a key
-    * [Statistical analysis for substitution ciphers](https://www.guballa.de/substitution-solver)
+    * [Statistical analysis for substitution ciphers](https://guballa.de/substitution-solver)
     * [QWERTY fingers on dvorak keyboard](http://wbic16.xedoloh.com/dvorak.html)
 * Morse code: try a lot of different online decoders, and make sure to check for
   caps, etc.
@@ -36,10 +37,14 @@
 * SMS
     * Looks like `999 666 88 222 2 66 777 33 2 3 6 999 7777 6 7777`
     * Example ctf challenge: [Tring Tring](https://github.com/S-H-E-L-L/S.H.E.L.L-CTF-2022/blob/main/crypto/Tring%20Tring/solution.md)
+* [Baconian cipher](https://dcode.fr/bacon-cipher)
+    * Looks like `bbbab bbbba bbbab abbab bbaba babbb bbaaa baaba baaab bbabb
+      abaab baaba abbaa babab babbb babba bbabb abbab bbaaa bbbbb abbab bbbba
+      bbbbb bbbab baaba baabb`
 
 ### Weird ones
 * Pigpen
-* [Birds on a wire](https://www.dcode.fr/birds-on-a-wire-cipher)
+* [Birds on a wire](https://dcode.fr/birds-on-a-wire-cipher)
     * Example ctf challenge: [Tweeeeet](https://github.com/S-H-E-L-L/S.H.E.L.L-CTF-2022/blob/main/crypto/Tweeeeet/solution.md)
     * It looks like the birds have to be precise matches; it isn't just a bird
       in general looking left/up/whatever. So the dcode link would be helpful.
@@ -57,7 +62,6 @@
       ```
 
 
-
 ### Actual decryption
 * XOR: in py, ord() converts character to number; chr() converts number to
   character 
@@ -72,7 +76,7 @@
   like John the Ripper with `rockyou.txt`
     * [passwordrecovery.io](https://passwordrecovery.io/md5): MD5 hash cracker;
       it'll compare your hash against hashes from `rockyou.txt` very quickly
-* [Getting Started with John the Ripper](https://www.tunnelsup.com/getting-started-cracking-password-hashes/)
+* [Getting Started with John the Ripper](https://tunnelsup.com/getting-started-cracking-password-hashes/)
 * [hashcat](https://github.com/hashcat/hashcat)
     * If you know part of the plaintext of a hash, then use [mask attack](https://hashcat.net/wiki/doku.php?id=mask_attack)
     * Download and unzip and make as necessary
@@ -86,13 +90,13 @@
     * `./john --format=netntlmv2 NAME.txt`
 * RSA
     * [My explanation of RSA](rsa.md)
-    * [RSA step by step explanation](https://www.cryptool.org/en/cto/rsa-step-by-step)
-    * [RSA calculator](https://www.cs.drexel.edu/~jpopyack/Courses/CSP/Fa17/notes/10.1_Cryptography/RSA_Express_EncryptDecrypt_v2.html)
+    * [RSA step by step explanation](https://cryptool.org/en/cto/rsa-step-by-step)
+    * [RSA calculator](https://cs.drexel.edu/~jpopyack/Courses/CSP/Fa17/notes/10.1_Cryptography/RSA_Express_EncryptDecrypt_v2.html)
     * [RsaCtfTool](https://github.com/RsaCtfTool/RsaCtfTool): can do lots of
       attacks
 * [encrypted pdfs](https://ctftime.org/writeup/8707): `pdfcrack --wordlist=rockyou.txt NAME.pdf`
 * shadow and passwd file dehashing
-    * [shadow format](https://www.linuxquestions.org/questions/linux-security-4/etc-shadow-file-663816): `$1$IwCH$c5VgaFQG9VZdL1UnWDUmj0`
+    * [shadow format](https://linuxquestions.org/questions/linux-security-4/etc-shadow-file-663816): `$1$IwCH$c5VgaFQG9VZdL1UnWDUmj0`
         * The part between the first two “$”s is the type of algorithm used (1
           indicates MD5)
         * The second part is the salt

@@ -14,4 +14,4 @@ OSINT = Open Source INTelligence
       IPs / URLs
 * [Wigle](https://wigle.net): aggregated wifi network data
 * [Yara](https://virustotal.github.io/yara): pattern matcher for malware
-* [Rapid7](https://www.rapid7.com/fundamentals): cybersecurity/management basics
+* [Rapid7](https://rapid7.com/fundamentals): cybersecurity/management basics

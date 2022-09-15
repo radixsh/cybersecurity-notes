@@ -7,9 +7,9 @@
       progress
 * Burp Suite
 * FoxyProxy
-    * [Selective proxy routing with FoxyProxy patterns](https://www.rynehanson.com/infosec/foxyproxy-patterns/)
+    * [Selective proxy routing with FoxyProxy patterns](https://rynehanson.com/infosec/foxyproxy-patterns/)
 * Wireshark
-    * [Chappell University](https://www.chappell-university.com/lauras-lab)
+    * [Chappell University](https://chappell-university.com/lauras-lab)
     * To see credentials a user tried: Click on one of the pcaps > Follow > TCP
       Stream
     * To see MD5 checksum of an uploaded file: apply the filter ftp-data and
@@ -39,7 +39,7 @@
       > search whatever string you need
 
 ## Notes
-* [subnets](http://www.steves-internet-guide.com/subnetting-subnet-masks-explained)
+* [subnets](http://steves-internet-guide.com/subnetting-subnet-masks-explained)
     * A valid IP of the 10.128.0.0 network is 10.128.0.1
     * [How to calculate prefix, network, subnet, and host numbers](https://networkengineering.stackexchange.com/questions/7106/how-do-you-calculate-the-prefix-network-subnet-and-host-numbers)
     * Use [subnet calculator](https://wintelguy.com/subnetcalc.pl) to find
@@ -52,7 +52,7 @@
     * Given an IP, say, 10.10.15.10/16:
         * Convert each of the four octets in that IP to binary:
           00001010:00001010:00001111.00001010
-        * [Find the subnet mask](https://www.aelius.com/njh/subnet_sheet.html)
+        * [Find the subnet mask](https://aelius.com/njh/subnet_sheet.html)
           and convert it into binary
         * Perform a bitwise AND operation with those two numbers:
           00001010.00001010:00000000.00000000

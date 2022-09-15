@@ -21,7 +21,8 @@ for myself. I remember things best when I teach them to myself.
 * Ghidra
     * [Ghidra: a quick overview](https://0xeb.net/2019/03/ghidra-a-quick-overview)
     * [Ghidra cheatsheet](https://ghidra-sre.org/CheatSheet.html)
-    * [Here Be Dragons: Reverse Engineering with Ghidra](https://www.shogunlab.com/blog/2019/12/22/here-be-dragons-ghidra-1.html)
+    * [Here Be Dragons: Reverse Engineering with Ghidra](https://shogunlab.com/blog/2019/12/22/here-be-dragons-ghidra-1.html)
+* [Compiler Explorer](https://godbolt.org)
 
 ### Web exploitation
 * How to examine HTTP request made when a purchase is made: Inspect
@@ -43,6 +44,7 @@ for myself. I remember things best when I teach them to myself.
 
 ### Binary exploitation
 * [Displaying value at address](https://stackoverflow.com/questions/14493707/display-value-found-at-given-address-gdb)
+
 ### Miscellaneous tips and tricks
 * To search for a file by a string in the filename (in the current directory and
   one directory down): `find . -maxdepth 1 -name "*foobar*" -print`
@@ -53,4 +55,4 @@ for myself. I remember things best when I teach them to myself.
 * [How to use code snippets in Vim like a cowboy](https://bhupesh.me/learn-how-to-use-code-snippets-vim-cowboy/)
 
 ### CTFs
-* [NCAE Cyber Games](https://www.ncaecybergames.org)
+* [NCAE Cyber Games](https://ncaecybergames.org)
