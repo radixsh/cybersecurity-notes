@@ -1,6 +1,22 @@
-# PortSwigger lab writeups
-Wow! I can do things now!
+# PortSwigger SQL injection
+Wow! I can do things now! This contains what I learned from PortSwigger's SQL
+injection labs, partially from following the server-side vulnerabilities learning path.
 
+## Notes
+To narrow down what flavor of SQL you're working with, use the
+[SQL injection cheat sheet](https://portswigger.net/web-security/sql-injection/cheat-sheet)
+from PortSwigger.
+
+To obtain information about the system, try these:
+| Purpose of command | Linux | Windows|
+| - | - | - |
+| **Name of current user** | whoami | whoami|
+| **Operating system** | uname -a |ver|
+| **Network configuration** | ifconfig| ipconfig /all|
+| **Network connections** |netstat -an | netstat -an|
+| **Running processes** |ps -ef| tasklist |
+
+## Lab writeups
 ### [SQL injection attack, listing the database contents on non-Oracle databases](https://portswigger.net/web-security/sql-injection/examining-the-database/lab-listing-database-contents-non-oracle)
 Level: Practitioner\
 Resources used: [PortSwigger "Determining the number of columns required"](https://portswigger.net/web-security/sql-injection/union-attacks#determining-the-number-of-columns-required), ["Listing the contents of the database"](https://portswigger.net/web-security/sql-injection/examining-the-database#listing-the-contents-of-the-database)\
@@ -24,7 +40,7 @@ We want to see the column names from that users table. Documentation indicates t
 
 Finally, show the values of the username and password fields within the users_uqhmky table:
 - `Accessories' UNION SELECT username_zzokdr,password_xqgpuc FROM users_uqhmky--`
-- This gives all usernames and passwords, and by all I mean just the admin account. 
+- This gives all usernames and passwords, and by all I mean just the admin account.
 
 Yay!!!!
 
@@ -75,7 +91,7 @@ Level: Practitioner\
 Resources: [SQL injection cheat sheet](https://portswigger.net/web-security/sql-injection/cheat-sheet), [Examining the database in SQL injection attacks](https://portswigger.net/web-security/sql-injection/examining-the-database#listing-the-contents-of-the-database)\
 Date completed: 2026-05-20
 
-Much the same: 
+Much the same:
 1. `Pets' ORDER BY 3--`
 2. `Pets' ORDER BY 2--`
 3. `Pets' UNION SELECT 'a','a' FROM information_schema.tables --`
